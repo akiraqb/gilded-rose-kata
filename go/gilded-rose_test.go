@@ -27,7 +27,16 @@ import (
 			- once sellin date pass quality degraeds twice as fast
 
 		* special 
+			- "Aged Brie" increases in quality the older it gets
+			- "Backstage passes" increase in qualiuty as it sellIn older it gets
 
+				- quality increases by 2 when there are 10 days or less
+				- quality increases by 3 when there are  5 days or less
+				- quality drops to 0  afterdate 
+
+			- "Sulfuras" being a legendary item, never has to be sold or decreased in quality,
+				fixed value of 80  
+			- "Conjured" items degrade in quality twice as fast as normal items.
 */
 
 
@@ -51,7 +60,7 @@ func Test_GildedRose(t *testing.T) {
 	t.Run("Test_main", func(t *testing.T){ main() })
 	t.Run("First_test",func(t *testing.T){ GildedRose(items) })
 
-	/* normla items */
+	/* normal items */
 
 
 	t.Run("Normal_sellIn_decrease", func(t *testing.T){ 
@@ -79,7 +88,7 @@ func Test_GildedRose(t *testing.T) {
 	})
 
 	/* Quality of normal item never rises so it will not apply
-		Its a staring value  in the system*/
+		Its a staring value in the system */
 	// t.Run("Normal_quality_never_more_50", func(t *testing.T){ 
 
 	// 	items:=[]Item{{"+5 Dexterity Vest", 10, 53},}
@@ -95,6 +104,11 @@ func Test_GildedRose(t *testing.T) {
 					//expected actual
 		assert.Equal(t,8, items[0].quality,"wrong quality value")
 	})
+
+	/* normal items */
+
+
+
 
 
 
