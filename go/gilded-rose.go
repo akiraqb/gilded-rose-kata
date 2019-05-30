@@ -16,11 +16,14 @@ type Item struct {
 // 	Item{"Conjured Mana Cake", 3, 6},
 // }
 
-func main() {
-	fmt.Println("OMGHAI!")
-	// fmt.Print(items)
-	// GildedRose()
-}
+
+/* 
+	Design:
+	- change items object of its class.
+	- ensure all can be updated
+	- loop through them using polymorphic processing (pdate them all)
+	- new test/new code agains the same desired logic 
+*/
 
 /* Functions for basic increase/decrease operations */
 
@@ -34,6 +37,16 @@ func (i * Item) updateQuality(value int){
 	i.quality += value
 }
 
+
+
+
+
+
+func main() {
+	fmt.Println("OMGHAI!")
+	// fmt.Print(items)
+	// GildedRose()
+}
 
 func GildedRose(items []Item) {
 	for i := 0; i < len(items); i++ {
