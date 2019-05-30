@@ -106,11 +106,55 @@ func Test_Normal_Update(t *testing.T){
 			assert.Equal(t,50,Nom.quality,"error quality value ")
 		})
 
-
-
-
-
 } // end of normal
+func Test_Backstage_Update(t *testing.T){
+
+			// Backstage
+		t.Run("Backstage_Update_sellIn_decrease", func(t *testing.T){
+
+			BS:=CreateBackstage(&Item{"Backstage passes to a TAFKAL80ETC concert", 15, 10})
+			BS.Update()
+			assert.Equal(t,14,BS.sellIn,"error sellin vaule")
+		})
+
+
+		t.Run("Backstage_Update_quality_increase_by_2", func(t *testing.T){
+
+			BS:=CreateBackstage(&Item{"Backstage passes to a TAFKAL80ETC concert", 10, 10})
+			BS.Update()
+			assert.Equal(t,9,BS.sellIn,"error sellin vaule")
+			assert.Equal(t,12,BS.quality,"error quality value ")
+		})
+
+		t.Run("Backstage_Update_quality_increase_by_3", func(t *testing.T){
+
+			BS:=CreateBackstage(&Item{"Backstage passes to a TAFKAL80ETC concert", 5, 10})
+			BS.Update()
+			assert.Equal(t,4,BS.sellIn,"error sellin vaule")
+			assert.Equal(t,13,BS.quality,"error quality value ")
+		})
+
+		t.Run("Backstage_Update_quality_drops_zero", func(t *testing.T){
+
+			BS:=CreateBackstage(&Item{"Backstage passes to a TAFKAL80ETC concert", 0, 10})
+			BS.Update()
+			assert.Equal(t,-1,BS.sellIn,"error sellin vaule")
+			assert.Equal(t,0,BS.quality,"error quality value ")
+		})
+
+		t.Run("Backstage_Update_quality_max", func(t *testing.T){
+
+			BS:=CreateBackstage(&Item{"Backstage passes to a TAFKAL80ETC concert", 25, 15})
+			//shouuld incrase up to max 50
+			for i:= 0; i < 24 ; i++ {
+				BS.Update()
+			}	
+			assert.Equal(t,1,BS.sellIn,"error sellin vaule")
+			assert.Equal(t,50,BS.quality,"error quality value ")
+		})
+
+
+}
 
 
 func Test_LegacyGildedRose(t *testing.T) {
