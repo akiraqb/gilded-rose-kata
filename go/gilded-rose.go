@@ -22,6 +22,19 @@ func main() {
 	// GildedRose()
 }
 
+/* Functions for basic increase/decrease operations */
+
+						//+= -1  will substrack
+						//+= +1  will add
+func (i * Item) updateSellIn(value int){
+	i.sellIn += value
+}
+
+func (i * Item) updateQuality(value int){
+	i.quality += value
+}
+
+
 func GildedRose(items []Item) {
 	for i := 0; i < len(items); i++ {
 

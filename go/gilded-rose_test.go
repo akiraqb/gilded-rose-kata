@@ -37,6 +37,37 @@ import (
 			- "Conjured" items degrade in quality twice as fast as normal items.
 */ 
 
+
+func Test_GildedRose(t *testing.T){
+
+	t.Run("Update_sellIn_quality_value_add", func(t *testing.T) {
+		//create array of testdata
+
+		items := []Item{{"+5 Dexterity Vest", 10, 10}}
+		items[0].updateSellIn(+1)
+		items[0].updateQuality(+1)
+		//expected actual
+		assert.Equal(t, 11, items[0].sellIn, "wrong sellin value")
+		assert.Equal(t, 11, items[0].quality, "wrong sellin value")
+
+	})
+	t.Run("Update_sellIn_quality_value_substract", func(t *testing.T) {
+		//create array of testdata
+
+		items := []Item{{"+5 Dexterity Vest", 10, 10}}
+		items[0].updateSellIn(-1)
+		items[0].updateQuality(-1)
+		//expected actual
+		assert.Equal(t, 9, items[0].sellIn, "wrong sellin value")
+		assert.Equal(t, 9, items[0].quality, "wrong sellin value")
+
+	})
+
+
+}
+
+
+
 func Test_LegacyGildedRose(t *testing.T) {
 
 	// var items = []Item{
