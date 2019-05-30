@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"testing"
+	"github.com/stretchr/testify/assert"
+)
 
 
 /* 
@@ -47,6 +50,51 @@ func Test_GildedRose(t *testing.T) {
 
 	t.Run("Test_main", func(t *testing.T){ main() })
 	t.Run("First_test",func(t *testing.T){ GildedRose(items) })
+
+	/* normla items */
+
+
+	t.Run("Normal_sellIn_decrease", func(t *testing.T){ 
+		//create array of testdata
+
+		items:=[]Item{{"+5 Dexterity Vest", 10, 10},}
+		GildedRose(items)
+					//expected actual
+		assert.Equal(t,9, items[0].sellIn,"wrong sellin value")
+
+	})
+	t.Run("Normal_quality_decrease", func(t *testing.T){ 
+		
+		items:=[]Item{{"+5 Dexterity Vest", 10, 10},}
+		GildedRose(items)
+					//expected actual
+		assert.Equal(t,9, items[0].quality,"wrong quality value")
+	})
+	t.Run("Normal_quality_never_negative", func(t *testing.T){ 
+
+		items:=[]Item{{"+5 Dexterity Vest", 10, 0},}
+		GildedRose(items)
+					//expected actual
+		assert.Equal(t,0, items[0].quality,"wrong quality value")
+	})
+
+	/* Quality of normal item never rises so it will not apply
+		Its a staring value  in the system*/
+	// t.Run("Normal_quality_never_more_50", func(t *testing.T){ 
+
+	// 	items:=[]Item{{"+5 Dexterity Vest", 10, 53},}
+	// 	GildedRose(items)
+	// 				//expected actual
+	// 	assert.Equal(t,50, items[0].quality,"wrong quality value")
+	// })
+
+	t.Run("Normal_quality_decrease_twice_as_fast", func(t *testing.T){ 
+
+		items:=[]Item{{"+5 Dexterity Vest", -1, 10},}
+		GildedRose(items)
+					//expected actual
+		assert.Equal(t,8, items[0].quality,"wrong quality value")
+	})
 
 
 
