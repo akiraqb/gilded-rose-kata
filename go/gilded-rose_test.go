@@ -63,9 +63,54 @@ func Test_GildedRose(t *testing.T){
 
 	})
 
-
 }
 
+
+func Test_Normal_Update(t *testing.T){
+
+	t.Run("Normal_Update_sellIn_decrease", func(t *testing.T){
+
+			Nom := CreateNormal(&Item{"+5 Dexterity Vest", 10, 10})
+			Nom.Update()
+			assert.Equal(t,9,Nom.sellIn,"error sellin vaule")
+		})
+
+	t.Run("Normal_Update_quality_decrease", func(t *testing.T){
+
+			Nom := CreateNormal(&Item{"+5 Dexterity Vest", 10, 10})
+			Nom.Update()
+			assert.Equal(t,9,Nom.quality,"error sellin vaule")
+		})
+
+	t.Run("Normal_Update_quality_never_negative", func(t *testing.T){
+
+			Nom := CreateNormal(&Item{"+5 Dexterity Vest", 10, 0})
+			Nom.Update()
+			assert.Equal(t,9,Nom.sellIn,"error sellin vaule")
+			assert.Equal(t,0,Nom.quality,"error quality value ")
+		})
+
+	t.Run("Normal_Update_quality_decrease_twice", func(t *testing.T){
+
+			Nom := CreateNormal(&Item{"+5 Dexterity Vest", -1, 10})
+			Nom.Update()
+			assert.Equal(t,-2,Nom.sellIn,"error sellin vaule")
+			assert.Equal(t,8,Nom.quality,"error quality value ")
+		})
+
+	t.Run("Normal_Update_quality_max", func(t *testing.T){
+
+			Nom := CreateNormal(&Item{"+5 Dexterity Vest", 10, 55})
+			Nom.Update()
+			assert.Equal(t,9,Nom.sellIn,"error sellin vaule")
+			assert.Equal(t,50,Nom.quality,"error quality value ")
+		})
+
+
+
+
+
+} // end of normal
 
 
 func Test_LegacyGildedRose(t *testing.T) {
