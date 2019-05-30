@@ -37,6 +37,51 @@ func (i * Item) updateQuality(value int){
 	i.quality += value
 }
 
+/* Add subtypes of objects */
+
+type Normal struct{
+	*Item
+}
+type AgedBrie struct{
+	*Item
+}
+type Sulfuras struct{
+	*Item
+}
+type Backstage struct{
+	*Item
+}
+
+const maxQuality = 50
+
+/* constructors */
+
+func CreateNormal(item *Item) *Normal{
+	//pointer to our type
+	pNormal:= &Normal{Item:item,}
+	return pNormal
+}
+
+func (item *Normal) Update(){
+
+	item.updateSellIn(-1)
+	if item.sellIn < 0 {
+		item.updateQuality(-2)
+	}else{
+		item.updateQuality(-1)
+	}
+	if item.quality < 0{
+		item.quality = 0
+	}
+	
+	if item.quality > maxQuality {
+		item.quality = maxQuality
+	}
+
+
+}
+
+
 
 
 
