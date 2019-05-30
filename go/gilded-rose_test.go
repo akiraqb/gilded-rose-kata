@@ -89,7 +89,7 @@ func Test_GildedRose(t *testing.T) {
 
 	/* Quality of normal item never rises so it will not apply
 		Its a staring value in the system */
-	// t.Run("Normal_quality_never_more_50", func(t *testing.T){ 
+	// t.Run("Normal_quality_max", func(t *testing.T){ 
 
 	// 	items:=[]Item{{"+5 Dexterity Vest", 10, 53},}
 	// 	GildedRose(items)
@@ -105,7 +105,92 @@ func Test_GildedRose(t *testing.T) {
 		assert.Equal(t,8, items[0].quality,"wrong quality value")
 	})
 
-	/* normal items */
+	/* Special */
+	/* Aged Bri items */
+
+	t.Run("Aged_Brie_sellIn_decrease", func(t *testing.T){ 
+
+		items:=[]Item{{"Aged Brie", 10, 10},}
+		GildedRose(items)
+					//expected actual
+		assert.Equal(t,9, items[0].sellIn,"wrong quality value")
+	})
+
+	t.Run("Aged_Brie_quality_increase", func(t *testing.T){ 
+
+		items:=[]Item{{"Aged Brie", 10, 10},}
+		GildedRose(items)
+					//expected actual
+		assert.Equal(t,11, items[0].quality,"wrong quality value")
+	})
+	
+	
+	t.Run("Aged_Brie_quality_max", func(t *testing.T){ 
+		
+		items:=[]Item{{"Aged Brie", 60, 45},}
+		for i:=0 ; i< 20; i++{
+			GildedRose(items)
+		} 
+							//expected actual
+		assert.Equal(t,40, items[0].sellIn,"wrong quality value")
+		assert.Equal(t,50,items[0].quality,"error quality value ")
+	})
+
+	/* WARNING look up again if it says that it increases 2 as fast after date 
+		Because it should be degradating 2 as fast after date? */
+
+	// t.Run("Aged_Brie_quality_increase_twice_as_fast", func(t *testing.T){ 
+
+	// 	items:=[]Item{{"Aged Brie", -1, 10},}
+	// 	GildedRose(items)
+	// 				//expected actual
+	// 	assert.Equal(t,8, items[0].quality,"wrong quality value")
+	// })
+
+	/* Backstage passes */
+
+	t.Run("Backstage_sellIn_decrease", func(t *testing.T){
+		
+		items:=[]Item{{"Backstage passes to a TAFKAL80ETC concert", 10, 10},}
+		GildedRose(items)
+		assert.Equal(t,9, items[0].sellIn,"wrong quality value")
+	})
+
+	t.Run("Backstage_quality_increase_by_2", func(t *testing.T){
+		
+		items:=[]Item{{"Backstage passes to a TAFKAL80ETC concert", 10, 10},}
+		GildedRose(items)
+		assert.Equal(t,9, items[0].sellIn,"wrong quality value")
+		assert.Equal(t,12, items[0].quality,"wrong quality value")
+	})
+
+	t.Run("Backstage_quality_increase_by_3", func(t *testing.T){
+		
+		items:=[]Item{{"Backstage passes to a TAFKAL80ETC concert", 5, 10},}
+		GildedRose(items)
+		assert.Equal(t,4, items[0].sellIn,"wrong quality value")
+		assert.Equal(t,13, items[0].quality,"wrong quality value")
+	})
+
+	t.Run("Backstage_quality_decrease_to_0", func(t *testing.T){
+		
+		items:=[]Item{{"Backstage passes to a TAFKAL80ETC concert", 0, 10},}
+		GildedRose(items)
+		assert.Equal(t,-1, items[0].sellIn,"wrong quality value")
+		assert.Equal(t,0, items[0].quality,"wrong quality value")
+	})
+
+	t.Run("Backstage_quality_,ax", func(t *testing.T){
+		
+		items:=[]Item{{"Backstage passes to a TAFKAL80ETC concert", 25, 15},}
+		
+		for i:=0 ; i <24 ; i++ {
+			GildedRose(items)
+		}
+		assert.Equal(t,1, items[0].sellIn,"wrong quality value")
+		assert.Equal(t,50, items[0].quality,"wrong quality value")
+	})
+
 
 
 
