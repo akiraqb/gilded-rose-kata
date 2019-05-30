@@ -2,6 +2,35 @@ package main
 
 import "testing"
 
+
+/* 
+	TODO:
+
+	- Analyse requirements 
+	- write test for legacy gode to check if code works in the first place 100%
+	- thing of refactoring
+	- add tests for refactor to aligh with previous logic, keep as much coverage as possible"
+	- implement refactoring */
+
+
+/* 
+	Requirements (acording to discription)
+	
+	- there are 2 group so fitems:
+		* normal items (everthing which is not special case):
+			- both quality and sellin dicrease by 1 every day
+			- quality item is necer negative 
+			- quality item is never more than 50
+			- once sellin date pass quality degraeds twice as fast
+
+		* special 
+
+*/
+
+
+
+
+
 func Test_GildedRose(t *testing.T) {
 	
 
@@ -18,5 +47,8 @@ func Test_GildedRose(t *testing.T) {
 
 	t.Run("Test_main", func(t *testing.T){ main() })
 	t.Run("First_test",func(t *testing.T){ GildedRose(items) })
+
+
+
 
 }
