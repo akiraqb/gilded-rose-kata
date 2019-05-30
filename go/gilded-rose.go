@@ -53,6 +53,7 @@ type Backstage struct{
 }
 
 const maxQuality = 50
+const minQuality = 0
 
 /* constructors */
 
@@ -62,6 +63,13 @@ func CreateNormal(item *Item) *Normal{
 	return pNormal
 }
 
+func CreateBackstage(item *Item) *Backstage{
+
+	pBs:= &Backstage{Item:item,}
+	return pBs
+}
+
+/* Update logic*/
 func (item *Normal) Update(){
 
 	item.updateSellIn(-1)
@@ -70,17 +78,36 @@ func (item *Normal) Update(){
 	}else{
 		item.updateQuality(-1)
 	}
-	if item.quality < 0{
-		item.quality = 0
+	if item.quality < minQuality{
+		item.quality = minQuality
 	}
 	
 	if item.quality > maxQuality {
 		item.quality = maxQuality
 	}
+} //end of Normal.update()
+
+
+func (item *Backstage) Update(){
+	item.updateSellIn(-1)
+	sellIn:=item.sellIn
+
+	switch{
+	case sellIn >=10:
+		item.updateQuality(+1)
+	case sellIn <10 && sellIn > 5:
+		item.updateQuality(+2)
+	case sellIn <=5 && sellIn > 0:
+		item.updateQuality(+3)
+	case sellIn < 0:
+		item.quality = minQuality
+	}
+	if item.quality > maxQuality{
+		item.quality = maxQuality
+	}
 
 
 }
-
 
 
 
