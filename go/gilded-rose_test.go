@@ -156,6 +156,35 @@ func Test_Backstage_Update(t *testing.T){
 
 }
 
+func Test_AgedBrie_Update(t *testing.T){
+
+	
+		t.Run("AgedBrie_Update_sellIn_decrease", func(t *testing.T){
+
+			ABrie:= CreateAgedBrie(&Item{"Aged Brie", 10, 10})
+			ABrie.Update()
+			assert.Equal(t,9,ABrie.sellIn,"error sellin vaule")
+		})
+
+		t.Run("AgedBrie_Update_quality_increase", func(t *testing.T){
+
+			ABrie:= CreateAgedBrie(&Item{"Aged Brie", 10, 10})
+			ABrie.Update()
+			assert.Equal(t,11,ABrie.quality,"error quality value ")
+		})
+
+		t.Run("AgedBrie_Update_quality_max", func(t *testing.T){
+
+			ABrie:= CreateAgedBrie(&Item{"Aged Brie", 60, 10})
+			//shouuld incrase up to max 50
+			for i:= 0; i < 50 ; i++ {
+				ABrie.Update()
+			}
+			assert.Equal(t,10,ABrie.sellIn,"error sellin vaule")
+			assert.Equal(t,50,ABrie.quality,"error quality value ")
+		})
+
+}
 
 func Test_LegacyGildedRose(t *testing.T) {
 

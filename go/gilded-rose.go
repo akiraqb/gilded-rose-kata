@@ -105,9 +105,9 @@ func (item *Backstage) Update(){
 	if item.quality > maxQuality{
 		item.quality = maxQuality
 	}
-
-
 }
+
+//Todo constuctor  + update for Aged Brie + Sulfuras
 
 
 
